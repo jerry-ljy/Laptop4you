@@ -1,0 +1,24 @@
+type,name,grade
+processor,Intel Core i9-10,2
+processor,Intel Core i7-11,2
+processor,Intel Core i7-10,2
+processor,Intel Core i7-9,2
+processor,Intel Core i7-8,1
+processor,Intel Core i5-11,1
+processor,Intel Core i5-10,1
+processor,Intel Core i5-9,1
+processor,Intel Core i5-8,0
+processor,Intel Core i3-11,0
+processor,Intel Core i3-10,0
+hard_drive,2TB_SSD,2
+hard_drive,1TB_SSD,2
+hard_drive,512GB_SSD+1TB_HDD,2
+hard_drive,512GB_SSD,2
+hard_drive,256GB_SSD,1
+hard_drive,256GB_SSD+1TB_HDD,1
+hard_drive,128GB_SSD+1TB_HDD,1
+hard_drive,1TB_HDD,0
+graphics,Intel,0
+graphics,RTX,2
+graphics,GTX,1
+graphics,MX,1

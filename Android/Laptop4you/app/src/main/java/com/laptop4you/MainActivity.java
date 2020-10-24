@@ -1,4 +1,4 @@
-package com.example.laptop4you;
+package com.laptop4you;
 
 import androidx.appcompat.app.AppCompatActivity;
 

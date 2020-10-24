@@ -22,6 +22,7 @@
 
 
     <RadioGroup
+        android:id="@+id/price_radio_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_price_submit"

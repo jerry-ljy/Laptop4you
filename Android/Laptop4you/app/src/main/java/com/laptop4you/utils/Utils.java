@@ -17,19 +17,20 @@ public class Utils {
     private Context mContext;
     private Map<String, float[]> mClusters;
 
+    public Utils(){}
     public Utils(Context context){
         this.mContext=context;
     }
 
-    public static void initDatabase(Context context){
-        String appDataPath = context.getApplicationInfo().dataDir;
+    public void initDatabase(){
+        String appDataPath = mContext.getApplicationInfo().dataDir;
         File dbFolder = new File(appDataPath + "/databases");//Make sure the /databases folder exists
         dbFolder.mkdir();//This can be called multiple times.
 
         File dbFilePath = new File(appDataPath + "/databases/LaptopDB.db");
 
         try {
-            InputStream inputStream = context.getAssets().open("LaptopDB.db");
+            InputStream inputStream = mContext.getAssets().open("LaptopDB.db");
             OutputStream outputStream = new FileOutputStream(dbFilePath);
             byte[] buffer = new byte[1024];
             int length;
@@ -42,6 +43,7 @@ public class Utils {
             inputStream.close();
         } catch (IOException e){
             //handle
+            e.printStackTrace();
         }
     }
 
@@ -139,33 +141,50 @@ public class Utils {
         return new_config;
     }
 
-    public ArrayList<Laptop> getLaptops(String cluster, float price){
-        ArrayList<String> uuidList = getUuids(cluster,price);
+    public ArrayList<Laptop> getLaptops(String cluster, int minPrice, int maxPrice){
+        ArrayList<String> uuidList = getUuids(cluster,minPrice,maxPrice);
         ArrayList<Laptop> laptops = new ArrayList<>();
         Database db = new Database(mContext);
         db.open();
         for(String uuid:uuidList){
             Cursor laptopCursor = db.exeSql("SElECT * FROM LAPTOPS WHERE UUID='"+uuid+"';");
-            Laptop laptop = new Laptop(uuid,
-                    laptopCursor.getString(laptopCursor.getColumnIndex("name")),
-                    laptopCursor.getString(laptopCursor.getColumnIndex("price")),
-                    laptopCursor.getString(laptopCursor.getColumnIndex("processor")),
-                    laptopCursor.getInt(laptopCursor.getColumnIndex("memory")),
-                    laptopCursor.getString(laptopCursor.getColumnIndex("hard_drive")),
-                    laptopCursor.getString(laptopCursor.getColumnIndex("graphics")),
-                    laptopCursor.getString(laptopCursor.getColumnIndex("img")));
+            if (laptopCursor.moveToFirst()){
+                do{
+                    String name = laptopCursor.getString(laptopCursor.getColumnIndex("name"));
+                    String price =laptopCursor.getString(laptopCursor.getColumnIndex("price"));
+                    String processor = laptopCursor.getString(laptopCursor.getColumnIndex("processor"));
+                    int memory = laptopCursor.getInt(laptopCursor.getColumnIndex("memory"));
+                    String hard_drive = laptopCursor.getString(laptopCursor.getColumnIndex("hard_drive"));
+                    String graphics = laptopCursor.getString(laptopCursor.getColumnIndex("graphics"));
+                    String img = laptopCursor.getString(laptopCursor.getColumnIndex("img"));
+                    Laptop laptop = new Laptop(uuid,name,price,processor,memory,hard_drive,graphics,img);
+                    laptops.add(laptop);
+                }while(laptopCursor.moveToNext());
+            }
+
             laptopCursor.close();
-            laptops.add(laptop);
         }
         db.close();
         return laptops;
     }
 
-    private ArrayList<String> getUuids(String cluster, float price){
+    private ArrayList<String> getUuids(String cluster, int minPrice, int maxPrice){
+        if(cluster=="" || (minPrice==-1 && maxPrice==-1)){
+            return null;
+        }
+
         ArrayList<String> uuidList = new ArrayList<>();
         Database db = new Database(mContext);
         db.open();
-        Cursor cursor = db.exeSql("SElECT * FROM "+cluster+" WHERE PRICE<"+price+";");
+        Cursor cursor=null;
+        if(minPrice==-1){
+            cursor= db.exeSql("SElECT * FROM "+cluster+" WHERE PRICE<="+maxPrice+";");
+        }else if(maxPrice==-1){
+            cursor= db.exeSql("SElECT * FROM "+cluster+" WHERE PRICE>="+minPrice+";");
+        }else{
+            cursor= db.exeSql("SElECT * FROM "+cluster+" WHERE PRICE>="+minPrice+" and PRICE<="+maxPrice+";");
+        }
+
         if (cursor.moveToFirst()){
             do{
                 String uuid = cursor.getString(cursor.getColumnIndex("uuid"));

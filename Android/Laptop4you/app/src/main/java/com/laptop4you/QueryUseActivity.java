@@ -12,14 +12,17 @@ import android.widget.Toast;
 
 public class QueryUseActivity extends AppCompatActivity {
 
-
     private Button mBtnNext;
     private CheckBox mCBGame, mCBOffice, mCBHome;
+    private int[] mUserReq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_query_use);
+
+        // init user requirement
+        mUserReq = new int[]{0,0,0,0};
 
         mCBGame = findViewById(R.id.use_opt_1);
         mCBOffice = findViewById(R.id.use_opt_2);
@@ -44,20 +47,32 @@ public class QueryUseActivity extends AppCompatActivity {
                 if(message.contains("game")){
                     Intent intent = new Intent(v.getContext(), QueryGameActivity.class);
                     intent.putExtra("MESSAGE",message);
+                    Bundle bd = new Bundle();
+                    bd.putIntArray("userReq",mUserReq);
+                    intent.putExtras(bd);
                     startActivity(intent);
                 }
                 else if(message.contains("office")){
                     Intent intent = new Intent(v.getContext(), QueryWorkActivity.class);
                     intent.putExtra("MESSAGE",message);
+                    Bundle bd = new Bundle();
+                    bd.putIntArray("userReq",mUserReq);
+                    intent.putExtras(bd);
                     startActivity(intent);
                 }
                 else if(message.contains("home")){
                     Intent intent = new Intent(v.getContext(), QueryHomeActivity.class);
                     intent.putExtra("MESSAGE",message);
+                    Bundle bd = new Bundle();
+                    bd.putIntArray("userReq",mUserReq);
+                    intent.putExtras(bd);
                     startActivity(intent);
                 }
                 else{
                     Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
+                    Bundle bd = new Bundle();
+                    bd.putIntArray("userReq",mUserReq);
+                    intent.putExtras(bd);
                     startActivity(intent);
                 }
             }

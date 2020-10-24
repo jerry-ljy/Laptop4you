@@ -10,7 +10,7 @@
     <string name="use_text_opt_1">Game</string>
     <string name="use_text_opt_2">Office</string>
     <string name="use_text_opt_3">Home</string>
-
+//////game activity
     <string name="game_ques">What type of game do you play?</string>
     <string name="game_text_opt_1">MOBA games(LOL,DOTA)</string>
     <string name="game_text_opt_2">Massively multiplayer online game(PUBG, CALL OF DUTY)</string>

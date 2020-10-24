@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,19 +31,24 @@ public class QueryGameActivity extends AppCompatActivity {
         mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(message.contains("office")){
-                    Intent intent = new Intent(v.getContext(), QueryWorkActivity.class);
-                    intent.putExtra("MESSAGE",message);
-                    startActivity(intent);
-                }
-                else if(message.contains("home")){
-                    Intent intent = new Intent(v.getContext(), QueryHomeActivity.class);
-                    intent.putExtra("MESSAGE",message);
-                    startActivity(intent);
+                if((mCBmoba.isChecked() || mCBmmo.isChecked() || mCBsmall.isChecked())){
+                    if(message.contains("office")){
+                        Intent intent = new Intent(v.getContext(), QueryWorkActivity.class);
+                        intent.putExtra("MESSAGE",message);
+                        startActivity(intent);
+                    }
+                    else if(message.contains("home")){
+                        Intent intent = new Intent(v.getContext(), QueryHomeActivity.class);
+                        intent.putExtra("MESSAGE",message);
+                        startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
+                        startActivity(intent);
+                    }
                 }
                 else{
-                    Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
-                    startActivity(intent);
+                    Toast.makeText(QueryGameActivity.this,"Please select at least one option", Toast.LENGTH_SHORT).show();
                 }
             }
         });

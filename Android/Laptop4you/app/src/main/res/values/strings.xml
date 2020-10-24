@@ -31,6 +31,7 @@
     <string name="price_text_opt_3">2000 \- 3000 SGD</string>
     <string name="price_text_opt_4">3000 \- 4000 SGD</string>
     <string name="price_text_opt_5">Above 4000 SGD</string>
+    <string name="submit">Submit</string>
 
 
 </resources>

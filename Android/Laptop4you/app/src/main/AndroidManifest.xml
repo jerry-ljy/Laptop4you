@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.laptop4you">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_laptop"
@@ -9,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Laptop4you">
-        <activity android:name=".ShowReasultActivity"></activity>
+        <activity android:name=".ShowResultActivity" />
         <activity android:name=".QueryPriceActivity" />
         <activity android:name=".QueryWorkActivity" />
         <activity android:name=".QueryUseActivity" />

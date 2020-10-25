@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/iv_laptop"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+
+        android:scaleType="fitXY"
+        android:background="@color/gray"
+        android:contentDescription="Laptopimg" />
+
+    <TextView
+        android:id="@+id/tv_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_laptop"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Model"
+
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_laptop"
+        android:layout_below="@id/tv_model"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:hint="price"
+        android:textColor="@color/red"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_processor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_laptop"
+        android:layout_below="@id/tv_price"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:hint="processor"
+        android:textColor="@color/gray"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tv_graphics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_laptop"
+        android:layout_below="@id/tv_processor"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:hint="graphics"
+        android:textColor="@color/gray"
+        android:textSize="12sp" />
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_laptop"
+        android:layout_below="@id/tv_graphics"
+        >
+        <TextView
+            android:id="@+id/tv_memory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:hint="memory"
+            android:textColor="@color/gray"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_hd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:hint="hard drive"
+            android:textColor="@color/gray"
+            android:textSize="12sp" />
+    </TableRow>
+
+
+</RelativeLayout>

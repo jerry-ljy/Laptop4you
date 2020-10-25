@@ -35,7 +35,7 @@ public class QueryPriceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int id = mRG.getCheckedRadioButtonId();
                 setPrice(id);
-                Intent intent =new Intent(v.getContext(), ShowReasultActivity.class);
+                Intent intent =new Intent(v.getContext(), ShowResultActivity.class);
                 intent.putExtra("cluster",mCluster);
                 intent.putExtra("minPrice",minPrice);
                 intent.putExtra("maxPrice",maxPrice);

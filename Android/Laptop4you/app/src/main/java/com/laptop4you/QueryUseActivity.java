@@ -32,48 +32,49 @@ public class QueryUseActivity extends AppCompatActivity {
         mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //get checkbox status
-                String message = "";
-                if(mCBGame.isChecked()){
-                    message = message +','+"game";
-                }
-                if(mCBOffice.isChecked()){
-                    message = message +','+"office";
-                }
-                if(mCBHome.isChecked()){
-                    message = message +','+"home";
-                }
-                //check which page to go
-                if(message.contains("game")){
-                    Intent intent = new Intent(v.getContext(), QueryGameActivity.class);
-                    intent.putExtra("MESSAGE",message);
-                    Bundle bd = new Bundle();
-                    bd.putIntArray("userReq",mUserReq);
-                    intent.putExtras(bd);
-                    startActivity(intent);
-                }
-                else if(message.contains("office")){
-                    Intent intent = new Intent(v.getContext(), QueryWorkActivity.class);
-                    intent.putExtra("MESSAGE",message);
-                    Bundle bd = new Bundle();
-                    bd.putIntArray("userReq",mUserReq);
-                    intent.putExtras(bd);
-                    startActivity(intent);
-                }
-                else if(message.contains("home")){
-                    Intent intent = new Intent(v.getContext(), QueryHomeActivity.class);
-                    intent.putExtra("MESSAGE",message);
-                    Bundle bd = new Bundle();
-                    bd.putIntArray("userReq",mUserReq);
-                    intent.putExtras(bd);
-                    startActivity(intent);
-                }
-                else{
-                    Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
-                    Bundle bd = new Bundle();
-                    bd.putIntArray("userReq",mUserReq);
-                    intent.putExtras(bd);
-                    startActivity(intent);
+                if (mCBGame.isChecked() || mCBOffice.isChecked() || mCBHome.isChecked()) {
+                    //get checkbox status
+                    String message = "";
+                    if (mCBGame.isChecked()) {
+                        message = message + ',' + "game";
+                    }
+                    if (mCBOffice.isChecked()) {
+                        message = message + ',' + "office";
+                    }
+                    if (mCBHome.isChecked()) {
+                        message = message + ',' + "home";
+                    }
+                    //check which page to go
+                    if (message.contains("game")) {
+                        Intent intent = new Intent(v.getContext(), QueryGameActivity.class);
+                        intent.putExtra("MESSAGE", message);
+                        Bundle bd = new Bundle();
+                        bd.putIntArray("userReq", mUserReq);
+                        intent.putExtras(bd);
+                        startActivity(intent);
+                    } else if (message.contains("office")) {
+                        Intent intent = new Intent(v.getContext(), QueryWorkActivity.class);
+                        intent.putExtra("MESSAGE", message);
+                        Bundle bd = new Bundle();
+                        bd.putIntArray("userReq", mUserReq);
+                        intent.putExtras(bd);
+                        startActivity(intent);
+                    } else if (message.contains("home")) {
+                        Intent intent = new Intent(v.getContext(), QueryHomeActivity.class);
+                        intent.putExtra("MESSAGE", message);
+                        Bundle bd = new Bundle();
+                        bd.putIntArray("userReq", mUserReq);
+                        intent.putExtras(bd);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
+                        Bundle bd = new Bundle();
+                        bd.putIntArray("userReq", mUserReq);
+                        intent.putExtras(bd);
+                        startActivity(intent);
+                    }
+                }else{
+                    Toast.makeText(QueryUseActivity.this,"Please select at least one option", Toast.LENGTH_SHORT).show();
                 }
             }
         });

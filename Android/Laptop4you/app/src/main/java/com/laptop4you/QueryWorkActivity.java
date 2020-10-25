@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.laptop4you.utils.Utils;
 
@@ -35,30 +36,33 @@ public class QueryWorkActivity extends AppCompatActivity {
         mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mDesign.isChecked()){
-                    mUserReq = mUtils.refreshUserReq("design",mUserReq);
-                }
-                if(mCode.isChecked()){
-                    mUserReq = mUtils.refreshUserReq("code",mUserReq);
-                }
-                if(mOffice.isChecked()){
-                    mUserReq = mUtils.refreshUserReq("office",mUserReq);
-                }
+                if(mDesign.isChecked() || mCode.isChecked() || mOffice.isChecked()) {
+                    if (mDesign.isChecked()) {
+                        mUserReq = mUtils.refreshUserReq("design", mUserReq);
+                    }
+                    if (mCode.isChecked()) {
+                        mUserReq = mUtils.refreshUserReq("code", mUserReq);
+                    }
+                    if (mOffice.isChecked()) {
+                        mUserReq = mUtils.refreshUserReq("office", mUserReq);
+                    }
 
-                if(message.contains("home")){
-                    Intent intent = new Intent(v.getContext(), QueryHomeActivity.class);
-                    intent.putExtra("MESSAGE",message);
-                    Bundle bd = new Bundle();
-                    bd.putIntArray("userReq",mUserReq);
-                    intent.putExtras(bd);
-                    startActivity(intent);
-                }
-                else{
-                    Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
-                    Bundle bd = new Bundle();
-                    bd.putIntArray("userReq",mUserReq);
-                    intent.putExtras(bd);
-                    startActivity(intent);
+                    if (message.contains("home")) {
+                        Intent intent = new Intent(v.getContext(), QueryHomeActivity.class);
+                        intent.putExtra("MESSAGE", message);
+                        Bundle bd = new Bundle();
+                        bd.putIntArray("userReq", mUserReq);
+                        intent.putExtras(bd);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
+                        Bundle bd = new Bundle();
+                        bd.putIntArray("userReq", mUserReq);
+                        intent.putExtras(bd);
+                        startActivity(intent);
+                    }
+                }else{
+                    Toast.makeText(QueryWorkActivity.this,"Please select at least one option", Toast.LENGTH_SHORT).show();
                 }
             }
         });

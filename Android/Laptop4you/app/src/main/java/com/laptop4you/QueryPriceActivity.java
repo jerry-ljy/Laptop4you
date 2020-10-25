@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.laptop4you.utils.Utils;
 
@@ -34,12 +35,16 @@ public class QueryPriceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int id = mRG.getCheckedRadioButtonId();
-                setPrice(id);
-                Intent intent =new Intent(v.getContext(), ShowResultActivity.class);
-                intent.putExtra("cluster",mCluster);
-                intent.putExtra("minPrice",minPrice);
-                intent.putExtra("maxPrice",maxPrice);
-                startActivity(intent);
+                if(id!=-1) {
+                    setPrice(id);
+                    Intent intent = new Intent(v.getContext(), ShowResultActivity.class);
+                    intent.putExtra("cluster", mCluster);
+                    intent.putExtra("minPrice", minPrice);
+                    intent.putExtra("maxPrice", maxPrice);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(QueryPriceActivity.this,"Please select at least one option", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

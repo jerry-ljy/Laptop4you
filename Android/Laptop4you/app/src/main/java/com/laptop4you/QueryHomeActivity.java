@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.laptop4you.utils.Utils;
 
@@ -31,15 +32,19 @@ public class QueryHomeActivity extends AppCompatActivity {
         mBtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mVideo.isChecked()){
-                    mUserReq = mUtils.refreshUserReq("video",mUserReq);
-                }
+                if(mSurf.isChecked() || mVideo.isChecked()) {
+                    if (mVideo.isChecked()) {
+                        mUserReq = mUtils.refreshUserReq("video", mUserReq);
+                    }
 
-                Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
-                Bundle bd = new Bundle();
-                bd.putIntArray("userReq",mUserReq);
-                intent.putExtras(bd);
-                startActivity(intent);
+                    Intent intent = new Intent(v.getContext(), QueryPriceActivity.class);
+                    Bundle bd = new Bundle();
+                    bd.putIntArray("userReq", mUserReq);
+                    intent.putExtras(bd);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(QueryHomeActivity.this,"Please select at least one option", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
